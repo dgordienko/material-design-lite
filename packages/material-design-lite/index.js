@@ -16,19 +16,21 @@
 
 import BaseComponent from 'mdl-base';
 import Checkbox from 'mdl-checkbox';
+import IconToggle from 'mdl-icon-toggle';
 import Radio from 'mdl-radio';
 import Ripple from 'mdl-ripple';
 import autoInit from 'mdl-auto-init';
 
-console.info('Hello, MDL!!!');
-
 // Register all components
 autoInit.register('MDLCheckbox', Checkbox);
+autoInit.register('MDLRipple', Ripple);
+autoInit.register('MDLIconToggle', IconToggle);
 
 // Export all components.
 export {
   BaseComponent,
   Checkbox,
+  IconToggle,
   Radio,
   Ripple,
   autoInit
