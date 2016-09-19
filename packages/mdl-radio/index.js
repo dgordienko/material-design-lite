@@ -14,29 +14,37 @@
  * limitations under the License.
  */
 
-import MDLComponent, {MDLBaseAdapterLegacy as MDLBaseAdapter} from 'mdl-base';
-import MDLRadioMixin, {
-  Identifier
-} from './mixin';
+import MDLComponent from 'mdl-base';
+import MDLRipple, {MDLRippleFoundation} from 'mdl-ripple';
+
+import MDLRadioFoundation from './foundation';
+
+export {MDLRadioFoundation};
 
 export default class MDLRadio extends MDLComponent {
+  // TODO buildDom
+
   static attachTo(root) {
     return new MDLRadio(root);
   }
 
-  constructor(root) {
-    super(root);
+  constructor() {
+    super(...arguments);
+    this.ripple_ = this.initRipple_();
+  }
 
-    const nativeInput = root.getElementsByClassName(Identifier.NATIVE_INPUT)[0];
-    const elements = {
-      [Identifier.ROOT]: root,
-      [Identifier.NATIVE_INPUT]: nativeInput
-    };
+  initRipple_() {
+    // TODO
+  }
 
-    this.elements_ = elements;
+  destroy() {
+    this.ripple_.destroy();
+    super.destroy();
+  }
 
-    this.initMdlRadio_();
+  getDefaultFoundation() {
+    return new MDLRadioFoundation({
+      getNativeControl: () => this.root_.querySelector(MDLRadioFoundation.strings.NATIVE_CONTROL_SELECTOR)
+    });
   }
 }
-
-MDLRadioMixin.call(MDLRadio.prototype, MDLBaseAdapter);
